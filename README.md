@@ -1,1 +1,1 @@
-# plsql-chrestomathy
+# A PL/SQL chrestomathy
