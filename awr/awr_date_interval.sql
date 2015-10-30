@@ -31,8 +31,8 @@
 
 
 
---  Note: We must be given SELECT on sys.dba_hist_snapshot and EXECUTE on
---  DBMS_WORKLOAD_REPOSITORY
+--  Note: We must have been granted SELECT on sys.dba_hist_snapshot and EXECUTE
+--        on DBMS_WORKLOAD_REPOSITORY.
 
 	
 CREATE OR REPLACE PACKAGE AWR_DATE_INTERVAL
