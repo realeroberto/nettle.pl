@@ -30,7 +30,7 @@
 
 
 
---  Note: We must be have been granted the ALTER ANY TABLE, DROP ANY TABLE,
+--  Note: We must have been granted the ALTER ANY TABLE, DROP ANY TABLE,
 --        CREATE ANY INDEX and DROP ANY INDEX privileges.
 
 
