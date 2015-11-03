@@ -3,7 +3,7 @@
 --  A PL/SQL chrestomathy
 -- 
 --  Module:    math
---  Submodule: sequences
+--  Submodule: math_sequences
 --  Purpose:   various sequences of interest to mathematicians
 --
 --  Copyright (c) 2014-5 Roberto Reale
