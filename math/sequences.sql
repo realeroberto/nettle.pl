@@ -4,7 +4,7 @@
 -- 
 --  Module:    math
 --  Submodule: sequences
---  Purpose:   builds various sequences of interest to mathematicians
+--  Purpose:   various sequences of interest to mathematicians
 --
 --  Copyright (c) 2014-5 Roberto Reale
 --  
