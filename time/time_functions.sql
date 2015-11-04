@@ -31,9 +31,26 @@
 
 CREATE OR REPLACE PACKAGE TIME_FUNCTIONS AS
 
+    --  cf. the discussion at https://community.oracle.com/message/4340069
+
+    SUBTYPE unconstrained_ds IS INTERVAL DAY(9) TO SECOND(9);
+
     --  emulates MySQL's TIME_TO_SEC()
 
-    FUNCTION TIME_TO_SEC(p_ts IN TIMESTAMP) RETURN NUMBER;
+    FUNCTION TIME_TO_SEC(p_ds IN unconstrained_ds)
+        RETURN NUMBER;
+
+    FUNCTION FROM_UNIX_TIMESTAMP(p_ts IN NUMBER)
+        RETURN TIMESTAMP WITH TIME ZONE;
+
+    FUNCTION TO_UNIX_TIMESTAMP(p_ts IN TIMESTAMP WITH TIME ZONE)
+        RETURN INTEGER;
+
+    FUNCTION FROM_ADS_TIMESTAMP(p_ts IN NUMBER)
+        RETURN TIMESTAMP WITH TIME ZONE;
+
+    FUNCTION TO_ADS_TIMESTAMP(p_ts IN TIMESTAMP WITH TIME ZONE)
+        RETURN INTEGER;
 
 END TIME_FUNCTIONS;
 /
@@ -41,16 +58,62 @@ END TIME_FUNCTIONS;
 
 CREATE OR REPLACE PACKAGE BODY TIME_FUNCTIONS AS
 
-    --  cf. e.g. the discussion at https://community.oracle.com/message/10636651
+    --  cf. e.g.:
+    --      https://community.oracle.com/message/10636651
+    --      http://stackoverflow.com/questions/11617962
 
-    FUNCTION TIME_TO_SEC(p_ts IN TIMESTAMP) RETURN NUMBER IS
+    FUNCTION TIME_TO_SEC(p_ds IN unconstrained_ds)
+        RETURN NUMBER
+    IS
     BEGIN
         RETURN
-            EXTRACT(DAY    FROM p_ts) * 24 * 60 * 60 +
-            EXTRACT(HOUR   FROM p_ts) * 60 * 60 +
-            EXTRACT(MINUTE FROM p_ts) * 60 +
-            EXTRACT(SECOND FROM p_ts);
+            EXTRACT(DAY    FROM p_ds) * 24 * 60 * 60 +
+            EXTRACT(HOUR   FROM p_ds) * 60 * 60 +
+            EXTRACT(MINUTE FROM p_ds) * 60 +
+            EXTRACT(SECOND FROM p_ds);
     END TIME_TO_SEC;
+
+
+    FUNCTION FROM_UNIX_TIMESTAMP(p_ts IN NUMBER)
+        RETURN TIMESTAMP WITH TIME ZONE
+    IS
+    BEGIN
+        RETURN
+            TO_TIMESTAMP_TZ('1970-01-01 UTC', 'yyyy-mm-dd TZR') +
+            NUMTODSINTERVAL(p_ts / 3600 / 24, 'DAY');
+    END FROM_UNIX_TIMESTAMP;
+
+
+    FUNCTION TO_UNIX_TIMESTAMP(p_ts IN TIMESTAMP WITH TIME ZONE)
+        RETURN INTEGER
+    IS
+    BEGIN
+        RETURN
+            TIME_TO_SEC(
+                (p_ts - to_timestamp_tz('1970-01-01 UTC', 'yyyy-mm-dd TZR'))
+            );
+    END TO_UNIX_TIMESTAMP;
+
+
+    FUNCTION FROM_ADS_TIMESTAMP(p_ts IN NUMBER)
+        RETURN TIMESTAMP WITH TIME ZONE
+    IS
+    BEGIN
+        RETURN
+            TO_TIMESTAMP_TZ('1601-01-01 UTC', 'yyyy-mm-dd TZR') +
+            NUMTODSINTERVAL(p_ts / POWER(10, 7) / 3600 / 24, 'DAY');
+    END FROM_ADS_TIMESTAMP;
+
+
+    FUNCTION TO_ADS_TIMESTAMP(p_ts IN TIMESTAMP WITH TIME ZONE)
+        RETURN INTEGER
+    IS
+    BEGIN
+        RETURN
+            TIME_TO_SEC(
+                (p_ts - to_timestamp_tz('1601-01-01 UTC', 'yyyy-mm-dd TZR'))
+            ) * POWER(10, 7);
+    END TO_ADS_TIMESTAMP;
 
 END TIME_FUNCTIONS;
 /
