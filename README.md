@@ -1,2 +1,2 @@
-A PL/SQL chrestomathy
+Nettle.pl: a PL/SQL chrestomathy
 ===
