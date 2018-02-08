@@ -3,10 +3,10 @@
 --  A PL/SQL chrestomathy
 -- 
 --  Module:    network
---  Submodule: inaddr_utils
+--  Submodule: utils
 --  Purpose:   utility procedures and functions for manipulating IP addresses
 --
---  Copyright (c) 2014-5 Roberto Reale
+--  Copyright (c) 2014-8 Roberto Reale
 --  
 --  Permission is hereby granted, free of charge, to any person obtaining a
 --  copy of this software and associated documentation files (the "Software"),
@@ -30,7 +30,7 @@
 
 
 
-CREATE OR REPLACE PACKAGE INADDR_UTILS
+CREATE OR REPLACE PACKAGE NETTLE_NETWORK_UTILS
 AS
 
 	FUNCTION IP_IN_SUBNET (
@@ -41,11 +41,11 @@ AS
 	
 	FUNCTION IP_TO_INT(ip_string IN VARCHAR2) RETURN INTEGER;
 
-END INADDR_UTILS;
+END NETTLE_NETWORK_UTILS;
 /
 
 
-CREATE OR REPLACE PACKAGE BODY INADDR_UTILS
+CREATE OR REPLACE PACKAGE BODY NETTLE_NETWORK_UTILS
 AS
 
 	FUNCTION INT_TO_BIN (p_num IN INTEGER) RETURN VARCHAR2
@@ -170,7 +170,7 @@ AS
 		RETURN TO_NUMBER(v8, 'FMXXXXXXXX');
 	END IP_TO_INT;
 
-END INADDR_UTILS;
+END NETTLE_NETWORK_UTILS;
 /
 
 
