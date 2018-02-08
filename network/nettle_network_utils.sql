@@ -37,6 +37,10 @@ AS
 		p_ip_address IN VARCHAR2, p_subnet IN VARCHAR2)
 		RETURN BOOLEAN;
 
+	FUNCTION IP_IN_SUBNET_AS_INT (
+		p_ip_address IN VARCHAR2, p_subnet IN VARCHAR2)
+		RETURN INTEGER;
+
 	FUNCTION INT_TO_IP(ip_address IN INTEGER) RETURN VARCHAR2;
 	
 	FUNCTION IP_TO_INT(ip_string IN VARCHAR2) RETURN INTEGER;
@@ -124,6 +128,18 @@ AS
 		RETURN l_ip_addr_shifted = l_subnet_addr_shifted;
 		
 	END IP_IN_SUBNET;
+
+
+	FUNCTION IP_IN_SUBNET_AS_INT (
+		p_ip_address IN VARCHAR2, p_subnet IN VARCHAR2)
+		RETURN INTEGER
+	IS
+		l_bool                 INTEGER;
+	BEGIN
+        l_bool := CASE WHEN IP_IN_SUBNET(p_ip_address, p_subnet) THEN 1 ELSE 0 END;
+
+        RETURN l_bool;
+	END IP_IN_SUBNET_AS_INT;
 
 
 	--  cf. http://stackoverflow.com/questions/1084413/
