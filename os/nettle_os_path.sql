@@ -7,7 +7,7 @@
 --  Purpose:   manipulation of strings representing filesystem paths
 --  Reference: http://www.pythian.com/blog/gnu-basename-in-plsql/
 --
---  Copyright (c) 2014-5 Roberto Reale
+--  Copyright (c) 2014-8 Roberto Reale
 --  
 --  Permission is hereby granted, free of charge, to any person obtaining a
 --  copy of this software and associated documentation files (the "Software"),
@@ -32,7 +32,7 @@
 
 
 
-CREATE OR REPLACE PACKAGE PATH IS
+CREATE OR REPLACE PACKAGE NETTLE_OS_PATH IS
 
     --  emulate GNU basename(1) and dirname(1)
 
@@ -47,11 +47,11 @@ CREATE OR REPLACE PACKAGE PATH IS
         p_separator    IN CHAR     DEFAULT '/'
     ) RETURN VARCHAR2;
 
-END PATH;
+END NETTLE_OS_PATH;
 /
 
 
-CREATE OR REPLACE PACKAGE BODY PATH IS
+CREATE OR REPLACE PACKAGE BODY NETTLE_OS_PATH IS
 
     FUNCTION BASENAME(
         p_full_path    IN VARCHAR2,
@@ -82,7 +82,7 @@ CREATE OR REPLACE PACKAGE BODY PATH IS
         RETURN l_dirname;
     END DIRNAME;
 
-END PATH;
+END NETTLE_OS_PATH;
 /
 
 --  ex: ts=4 sw=4 et filetype=sql
