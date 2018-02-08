@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 --
---  A PL/SQL chrestomathy
+--  Nettle.pl: a PL/SQL chrestomathy
 -- 
 --  Module:    os
 --  Submodule: path
