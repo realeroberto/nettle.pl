@@ -1,5 +1,8 @@
-Nettle.pl: a PL/SQL chrestomathy
-===
+# Nettle.pl: a PL/SQL chrestomathy
+
+## Usage
+
+Just install the modules you need.
 
 ## OS
 
