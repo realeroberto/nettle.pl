@@ -8,5 +8,9 @@ env:
     - ORACLE_SID=XE
 
 before_script:
+  # install Oracle Database Express Edition
   - .travis/oracle/download.sh
   - .travis/oracle/install.sh
+  # install the utPLSQL unit testing framework
+  - .travis/utplsql/download.sh
+  - .travis/utplsql/install.sh
