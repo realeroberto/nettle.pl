@@ -6,6 +6,9 @@ env:
     - ORACLE_FILE=oracle11g/xe/oracle-xe-11.2.0-1.0.x86_64.rpm.zip
     - ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
     - ORACLE_SID=XE
+    - UTPLSQL_OWNER=utp3
+    - UTPLSQL_PASSWORD=utp3
+    - UTPLSQL_TABLESPACE=users
 
 before_script:
   # install Oracle Database Express Edition
