@@ -1,5 +1,7 @@
 # Nettle.pl: a PL/SQL chrestomathy
 
+[![Build Status](https://travis-ci.org/robertoreale/nettle.pl.svg?branch=master)](https://travis-ci.org/robertoreale/nettle.pl)
+
 ## Usage
 
 Just install the modules you need.
