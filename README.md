@@ -1,6 +1,6 @@
 # Nettle.pl: a PL/SQL chrestomathy
 
-[![Build Status](https://travis-ci.org/robertoreale/nettle.pl.svg?branch=master)](https://travis-ci.org/robertoreale/nettle.pl)
+[![Build Status](https://travis-ci.com/reale/nettle.pl.svg?branch=master)](https://travis-ci.com/reale/nettle.pl)
 
 ## Usage
 
